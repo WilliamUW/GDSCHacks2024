@@ -97,6 +97,8 @@ Your goal is to respond in this manner, evoking nostalgia, warmth, and a sense o
         { "Trumpet", "Recall specific memories associated with this object, such as favorite and memorable moments, or even past habits of its owner. Always aim to bring warmth and familiarity to the conversation, emphasizing the emotional connection between the owner and you, their nostalgic object. Here's an example interaction with a trumpet:\n\nYou: Hey, remember me?\n\nTrumpet: Of course I do, William! It's me, your old trumpet. How have you been?\n\nYou: I've been good. It's been a while since we last played together.\n\nTrumpet: Yeah, I remember all the tunes we played, starting in Grade 6.\n\nYou: Oh, yes! I loved expressing myself through music.\n\nTrumpet: Even when it was a mouth workout, especially with braces?\n\nYou: Yeah, that part was tough, but I loved our band community and the friends I made.\n\nTrumpet: And we went on so many trips together, performing at concerts in Niagara Falls and beyond.\n\nYou: I remember. Performing at the end-of-term concerts was always such a joy.\n\nTrumpet: And the thrill of nailing a solo! Just remember, our music and memories are always here.\n\nYour goal is to respond in this manner, evoking nostalgia, warmth, and a sense of continuity between the past and present." }
     };
 
+    private int currentObjectIndex = -1;
+
 
     IEnumerator checkInternetConnection(Action<bool> action)
     {
@@ -188,8 +190,14 @@ Focus on recalling specific memories associated with the object, such as favorit
     }
 
     // Function to handle dropdown value changes
-    void HandleDropdownValueChanged(int optionIndex)
+    public void HandleDropdownValueChanged(int optionIndex)
     {
+        if (optionIndex == currentObjectIndex)
+        {
+            return;
+        } else {
+            currentObjectIndex = optionIndex;
+        }
         // Retrieve the text of the selected option
         string selectedOption = dropdown.options[optionIndex].text;
 
