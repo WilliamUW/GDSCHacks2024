@@ -206,6 +206,8 @@ Focus on recalling specific memories associated with the object, such as favorit
 
         PlayBackgroundClip(optionIndex);
 
+        speak("Hey William, it's me, your " + selectedOption + ". Do you remember me?");
+
         // Here you can implement additional logic, such as updating the UI or performing an action
         // spawnObject(optionIndex, selectedOption);
 
