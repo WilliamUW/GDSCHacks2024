@@ -196,8 +196,10 @@ Focus on recalling specific memories associated with the object, such as favorit
         // Handle the selected option as needed
         Debug.Log("Selected option: " + selectedOption);
 
+        PlayBackgroundClip(optionIndex);
+
         // Here you can implement additional logic, such as updating the UI or performing an action
-        spawnObject(optionIndex, selectedOption);
+        // spawnObject(optionIndex, selectedOption);
 
         string newPrompt = createPrompt(selectedOption, "William Wang", optionIndex);
         AskGemini(newPrompt, true, false);
@@ -220,7 +222,6 @@ Focus on recalling specific memories associated with the object, such as favorit
             Debug.LogError("Object index out of range.");
             return;
         }
-        PlayBackgroundClip(objectIndex);
         var newObject = Instantiate(spawnObjects[objectIndex]);
         Vector3 spawnPoint = new Vector3(0, 1, 0);
         newObject.transform.position = spawnPoint;
