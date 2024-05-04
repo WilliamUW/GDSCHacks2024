@@ -22,7 +22,20 @@ using SimpleJSON; // Make sure to include this
 using Meta.Voice.Samples.Dictation;
 using System.Reflection;
 using Button = UnityEngine.UI.Button;
+public class GenerationConfig
+{
+    public List<string> StopSequences { get; set; }
+    public double Temperature { get; set; }
+    public int MaxOutputTokens { get; set; }
+    public double TopP { get; set; }
+    public int TopK { get; set; }
+}
 
+public class SafetySetting
+{
+    public string Category { get; set; }
+    public string Threshold { get; set; }
+}
 public class ScreenshotHandler : MonoBehaviour
 {
     public DictationActivation controller; // Assign this in the Inspector
@@ -672,11 +685,19 @@ Focus on recalling specific memories associated with the object, such as favorit
                     },
                 }
             };
-
+            var generationConfig = new GenerationConfig
+            {
+                StopSequences = new List<string> { "Title" },
+                Temperature = 1.0,
+                MaxOutputTokens = 200,
+                TopP = 0.8,
+                TopK = 10
+            };  
             var payload = new
             {
                 contents = conversation,
                 safetySettings = safetySettings,
+                generationConfig = generationConfig,
             };
             // Serialize the payload
             var conversationJson = JsonConvert.SerializeObject(requestBody, Newtonsoft.Json.Formatting.None);
