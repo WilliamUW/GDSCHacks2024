@@ -111,6 +111,7 @@ Your goal is to respond in this manner, evoking nostalgia, warmth, and a sense o
     };
 
     private int currentObjectIndex = -1;
+    public float maxDistance = 5f;  // Distance threshold
 
 
     IEnumerator checkInternetConnection(Action<bool> action)
@@ -178,6 +179,28 @@ Your goal is to respond in this manner, evoking nostalgia, warmth, and a sense o
             audioSource = GetComponent<AudioSource>();
         }
     }
+    private Vector3 spawnPoint = new Vector3(0, 1, 0);
+
+     void Update()
+    {
+        foreach (GameObject obj in spawnObjects)
+        {
+            if (obj != null)  // Check if the object reference is not null
+            {
+                Rigidbody rb = obj.GetComponent<Rigidbody>();  // Try to get the Rigidbody component
+                if (rb != null)  // Check if the object has a Rigidbody
+                {
+                    float squaredDistance = (obj.transform.position - Vector3.zero).sqrMagnitude;  // Calculate squared distance
+                    if (squaredDistance > maxDistance * maxDistance)  // Compare to squared max distance
+                    {
+                        obj.transform.position = spawnPoint;  // Reset position to the origin
+                        rb.velocity = Vector3.zero;  // Reset velocity to zero
+                        Debug.Log("Reset position and velocity of " + obj.name);
+                    }
+                }
+            }
+        }
+    }
 
     public void PlayBackgroundClip(int clipIndex)
     {
@@ -225,7 +248,7 @@ Focus on recalling specific memories associated with the object, such as favorit
         // spawnObject(optionIndex, selectedOption);
 
         string newPrompt = createPrompt(selectedOption, "William Wang", optionIndex);
-        AskGemini(newPrompt, true, false);
+        AskGemini(newPrompt, true, false, false);
     }
 
     void OnDestroy()
@@ -586,7 +609,7 @@ Focus on recalling specific memories associated with the object, such as favorit
         }
     }
 
-    public async void AskGemini(string userQuery, bool resetConversation = false, bool announceQuestion = true)
+    public async void AskGemini(string userQuery, bool resetConversation = false, bool announceQuestion = true, bool announceAnswer = true)
     {
         if (string.IsNullOrWhiteSpace(userQuery))
         {
@@ -681,15 +704,15 @@ Focus on recalling specific memories associated with the object, such as favorit
                 {
                     function_calling_config = new
                     {
-                        mode = "AUTO"
+                        mode = "NONE"
                     },
                 }
             };
             var generationConfig = new GenerationConfig
             {
-                StopSequences = new List<string> { "Title" },
+                StopSequences = new List<string> { },
                 Temperature = 1.0,
-                MaxOutputTokens = 80,
+                MaxOutputTokens = 50,
                 TopP = 0.8,
                 TopK = 10
             };  
@@ -740,7 +763,7 @@ Focus on recalling specific memories associated with the object, such as favorit
 
                     Debug.Log(JsonConvert.SerializeObject(conversation, Newtonsoft.Json.Formatting.Indented));
 
-                    if (extractedText != null)
+                    if (announceAnswer && extractedText != null)
                     {
                         speak(extractedText);
                     }
@@ -761,6 +784,7 @@ Focus on recalling specific memories associated with the object, such as favorit
                         //{
                         //    change_size(functionCall["args"]["magnitude"].ToString(), functionCall["args"]["body"].ToString());
                         //}
+                        speak("Function Call Detected: " + functionName);
                     }
                     else
                     {
