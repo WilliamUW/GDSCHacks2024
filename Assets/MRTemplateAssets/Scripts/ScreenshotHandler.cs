@@ -128,7 +128,7 @@ Your goal is to respond in this manner, evoking nostalgia, warmth, and a sense o
     }
     void Start()
     {
-        PlayBackgroundClip(0);
+        PlayBackgroundClip(4);
 
         // Ensure the dropdown and list of GameObjects are assigned
         if (dropdown != null && spawnObjects != null)
@@ -689,7 +689,7 @@ Focus on recalling specific memories associated with the object, such as favorit
             {
                 StopSequences = new List<string> { "Title" },
                 Temperature = 1.0,
-                MaxOutputTokens = 200,
+                MaxOutputTokens = 80,
                 TopP = 0.8,
                 TopK = 10
             };  

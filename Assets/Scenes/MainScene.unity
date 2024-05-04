@@ -5116,6 +5116,7 @@ MonoBehaviour:
   - {fileID: 566646474}
   - {fileID: 362130349}
   - {fileID: 1407199528}
+  - {fileID: 1066581104}
   tutorialPanel: {fileID: 1291399506}
   dropdown: {fileID: 1891673207}
 --- !u!4 &381159656
@@ -6519,6 +6520,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2716803546934012256, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2912157116430665417, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -6653,7 +6658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586247136290578643, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -12.5
+      value: -762
       objectReference: {fileID: 0}
     - target: {fileID: 7586247136290578643, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -23895,6 +23900,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2622121586217573351, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716803546934012256, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
+      propertyPath: m_IsOn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2912157116430665417, guid: 6ff7fbfe0243d604ea0d362d82d4baf2, type: 3}
